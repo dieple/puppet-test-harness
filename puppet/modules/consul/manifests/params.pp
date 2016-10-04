@@ -14,7 +14,7 @@ class consul::params {
   $ui_package_ensure     = 'latest'
   $ui_download_url_base  = 'https://releases.hashicorp.com/consul/'
   $ui_download_extension = 'zip'
-  $version               = '0.7.0'
+  $version               = '0.5.2'
   $config_mode           = '0660'
 
   case $::architecture {
