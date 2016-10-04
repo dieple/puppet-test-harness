@@ -1,0 +1,17 @@
+# IntelliJ
+.idea
+*.iml
+
+# Vagrant
+.vagrant
+
+# Ruby and rvm
+.ruby-version
+.ruby-gemset
+Gemfile.lock
+
+# gems
+pkg
+
+# Daemons
+run
