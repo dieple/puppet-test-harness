@@ -7,18 +7,21 @@ node 'haproxy' {
   include profile::load_balancer
 }
 
-node 'consul1' {
-  require profile::utils::unzip
-	include profile::consul::bootstrap
+node 'cszk01' {
+  #include profile::consul::bootstrap
+  include profile::zookeeper::init
 }
 
-node 'consul2', 'consul3' {
-  require profile::utils::unzip
+node 'cszk02', 'cszk03' {
 	include profile::consul::server
+  include profile::zookeeper::init
 }
 
 node 'node01', 'node02' {
-  require profile::utils::unzip
-  require profile::java::openjdk
-	include profile::consul::client
+	include profile::mongodb::install
+	#include profile::nodejs::install
+  #include profile::java::openjdk
+  #include profile::solr::install
+	#include profile::consul::client
 }
+

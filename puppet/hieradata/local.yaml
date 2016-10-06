@@ -1,8 +1,30 @@
 ---
 aws-region : 'eu-west-1'
+cs-bootstrap-name : 'cs-bootstrap'
+cs-agent-name : 'consul-agent'
+cs-server-name : 'cs-server'
 
-consul-hosts  :
-  - '192.168.10.30'
-  - '192.168.10.31'
-  - '192.168.10.32'
+mongodb-create-db : true
+mongodb-name : 'tradefinance'
+mongodb-user : 'tradefinance'
+mongodb-hash-passwd : 'a15fbfca5e3a758be80ceaf42458bcd8'
+
+cszk-hosts  :
+  - '192.168.10.21'
+  - '192.168.10.22'
+
+cszk-hosts-with-bootstrap  :
+  - '192.168.10.20'
+  - '192.168.10.21'
+  - '192.168.10.22'
+
+zk-election-port :  2889
+zk-leader-port :  3889
+
+zk1-ip-address :  '192.168.10.20'
+zk2-ip-address :  '192.168.10.21'
+zk3-ip-address :  '192.168.10.22'
+
+nodejs-version : '5.x'
+
 

@@ -1,33 +1,25 @@
 {
-    "nodes": {
-        "puppet.example.com": {
-            "ip": "192.168.10.10",
-            "ports": [8140],
-            "role" : "master"
-        },
-        "node01.example.com": {
-            "ip": "192.168.10.11",
-            "ports": [8080]
-        },
-        "node02.example.com": {
-            "ip": "192.168.10.12",
-            "ports": [8080]
-        },
-        "haproxy.example.com": {
-            "ip": "192.168.10.20",
-            "ports": [80, 8080]
-        },
-        "consul1.example.com": {
-            "ip": "192.168.10.30",
-            "ports": [8500]
-        },
-        "consul2.example.com": {
-            "ip": "192.168.10.31",
-            "ports": [8500]
-        },
-        "consul3.example.com": {
-            "ip": "192.168.10.32",
-            "ports": [8500]
-        }
+  "nodes": {
+    "puppet.example.com": {
+      "ip": "192.168.10.10",
+      "ports": [8140],
+      "role" : "master"
+    },
+    "cszk01.example.com": {
+      "ip": "192.168.10.20",
+      "ports": [2888,3888,8080,8300,8301,8400,8500,8600]
+    },
+    "cszk02.example.com": {
+      "ip": "192.168.10.21",
+      "ports": [2888,3888,8080,8300,8301,8400,8500,8600]
+    },
+    "cszk03.example.com": {
+      "ip": "192.168.10.22",
+      "ports": [2888,3888,8080,8300,8301,8400,8500,8600]
+    },
+    "node01.example.com": {
+      "ip": "192.168.10.50",
+      "ports": [2888,3888,8080,8300,8301,8400,8500,8600]
     }
+  }
 }

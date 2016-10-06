@@ -1,19 +1,21 @@
 class profile::consul::bootstrap {
 
-  $consul_hosts = hiera('consul-hosts')
+  $node_name    = hiera('cs-bootstrap-name')
   $datacenter   = hiera('aws-region')
+
+  # install requirements
+  ensure_packages('unzip')
 
   class { '::consul':
     config_hash => {
-      'bootstrap_expect' => count($consul_hosts),
+      'bootstrap'        => true,
       'client_addr'      => '0.0.0.0',
       'data_dir'         => '/opt/consul',
       'datacenter'       => $datacenter,
       'log_level'        => 'INFO',
-      'node_name'        => 'cs-bootstrap',
+      'node_name'        => $node_name,
       'server'           => true,
       'ui_dir'           => '/opt/consul/ui',
-      'retry_join'       => $consul_hosts,
     }
   }
 }

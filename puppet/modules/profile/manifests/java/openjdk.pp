@@ -1,6 +1,7 @@
 class profile::java::openjdk {
 
-  class { 'java' :
+  class { '::java' :
     package => 'java-1.8.0-openjdk-devel',
   }
+
 }
