@@ -1,0 +1,110 @@
+" ###
+" ### ATTENTION! ATTENTION! ATTENTION!
+" ###     This file is managed by Puppet.
+" ###     Any local modifications will be lost in the next puppet run.
+" ### ATTENTION! ATTENTION! ATTENTION!
+" ###
+
+set nocompatible        " Use Vim defaults (much better!)
+
+syntax on
+filetype indent plugin on
+
+set bs=indent,eol,start " allow backspacing over everything in insert mode
+set viminfo='20,\"50    " read/write a .viminfo file, don't store more than 50 lines of registers
+set history=50          " keep 50 lines of command line history
+
+set ruler               " show the cursor position all the time
+set fileencodings=utf-8,latin1
+
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+  augroup redhat
+    " In text files, always limit the width of text to 78 characters
+    autocmd BufRead *.txt set tw=78
+    autocmd BufRead,BufReadPost,FileType *       set formatoptions=qrc
+    autocmd BufNewFile,BufRead *.rb              setlocal filetype=ruby
+    autocmd BufNewFile,BufRead Rakefile,Capfile  setlocal filetype=ruby
+    autocmd BufNewFile,BufRead Vagrantfile       setlocal filetype=ruby
+    autocmd FileType           ruby              setlocal ts=2 sts=2 sw=2 et nowrap
+    autocmd BufRead,BufNewFile *.pp              setlocal ts=2 sts=2 sw=2 et nowrap filetype=puppet
+    " When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+  augroup END
+endif
+
+" Case:
+set ignorecase          " case insensitive:
+set infercase           " if there are caps adjust auto-completion
+
+" TabStops:
+set tabstop=4           " real tabs will show 8 spaces
+set softtabstop=4       " how many spaces in a tabstop
+set shiftwidth=4        " sw: indent size
+set expandtab           " no tabs - space in place of tabstops
+set smarttab            " sta: space in place of tabs in a new line
+
+" Indent:
+set autoindent          " ai: pre-req for si
+set smartindent         " si: on
+set copyindent          " ci: copy same character used in previous indent line
+set shiftround          " round indent to shiftwidth
+
+" Search:
+set nohlsearch          " Highlight search terms: off on start
+set incsearch           " Highlight dynamically as they are typed.
+set gdefault            " global search/replace by default
+set report=0            " report all lines changed
+
+" Line Breaks:
+set linebreak                   " when wrapping, uses chars listed in breakt
+set breakat=\ ^I!@*-+;:,./?     " when wrapping, break at these characters
+set showbreak=…                 " what to show at the start of a wrapped line
+set iskeyword+=48-57,192-255
+set iskeyword+=_,$,@,%,#        " none of these are word dividers
+
+" Matching Brackets:
+set showmatch           " show matching brackets
+set matchtime=5         " ms blinking showmatch
+
+" Wrapping Text:
+set backspace=indent,eol,start  " make backspace a more flexible
+
+" Visible Characters:
+set nolist              " [no]list invisible chars
+set listchars=tab:▸\ ,trail:·,eol:¬,extends:>,precedes:<
+set nostartofline       " keep cursor in same column when moving up/down
+
+
+" Terminal vim:
+"et bg=dark
+set t_Co=256             " Terminal 256 colors
+"olorscheme desert
+colorscheme wombat256mod " use if present
+set paste                " correct paste on terminal
+
+set nu                   " line numbers
+set nowrap               " do not break lines
+
+" Command Line:
+set showcmd
+set history=300                 " history size
+set wildmode=list:longest       " command line complete
+
+
+
+""" Toggles
+" on/off highlight search"
+  nmap ,h :set invhls<CR>
+
+" on/off list chars
+  nmap ,l :set invlist<CR>
+
+" on/off linenumbers
+  nmap ,n :set invnu<CR>
+
+" vim:ft=vim
+

@@ -1,0 +1,18 @@
+###
+### ATTENTION! ATTENTION! ATTENTION!
+###     This file is managed by Puppet.
+###     Any local modifications will be lost in the next puppet run.
+### ATTENTION! ATTENTION! ATTENTION!
+###
+
+[main]
+enabled=0
+verbose=0
+socket_timeout=3
+hostfilepath=/var/cache/yum/timedhosts.txt
+maxhostfileage=10
+maxthreads=15
+#exclude=.gov, facebook
+
+# vim:ft=conf:
+

@@ -1,0 +1,11 @@
+# This file is managed by Puppet!!!
+
+###
+### Read-only git clone
+###
+Host codebasehq.com
+    IdentityFile /home/infra/.ssh/infra_read_id_rsa
+
+
+# vim:ft=sshconfig:
+

@@ -1,0 +1,12 @@
+###
+### ATTENTION! ATTENTION! ATTENTION!
+###     This file is managed by Puppet.
+###     Any local modifications will be lost in the next puppet run.
+### ATTENTION! ATTENTION! ATTENTION!
+###
+
+#
+# PLEASE DO NOT USE THE DEFAULT VALUES HERE.
+#
+#65535	M	akey
+#1	M	pass

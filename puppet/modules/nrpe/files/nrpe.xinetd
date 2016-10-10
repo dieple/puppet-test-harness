@@ -1,0 +1,28 @@
+
+###
+### ATTENTION! ATTENTION! ATTENTION!
+###     This file is managed by Puppet.
+###     Any local modifications will be lost in the next puppet run.
+### ATTENTION! ATTENTION! ATTENTION!
+###
+
+# default: off
+# description: NRPE (Nagios Remote Plugin Executor)
+service nrpe
+{
+        flags           = REUSE
+        type            = UNLISTED
+        port            = 5666
+        socket_type     = stream
+        wait            = no
+        user            = nagios
+        group           = nagios
+        server          = /usr/sbin/nrpe
+        server_args     = -c /etc/nagios/nrpe.cfg --inetd
+        log_on_failure += USERID
+        disable         = yes
+        only_from       = 127.0.0.1
+}
+
+# vim:ft=xinetd:
+

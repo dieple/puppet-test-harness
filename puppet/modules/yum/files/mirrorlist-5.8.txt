@@ -1,0 +1,5 @@
+http://repo.abril.com.br/rpm/centos/5.8/
+http://centos.pop.com.br/5.8/os/x86_64/
+http://centos.redeminastelecom.com.br/5.8/os/x86_64/
+http://mirror.ueg.br/centos/5.8/os/x86_64/
+http://centos.secrel.com.br/5.8/os/x86_64/

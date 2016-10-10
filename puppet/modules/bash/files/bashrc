@@ -1,0 +1,57 @@
+# /etc/bashrc
+
+###
+### ATTENTION! ATTENTION! ATTENTION!
+###     This file is managed by Puppet.
+###     Any local modifications will be lost in the next puppet run.
+### ATTENTION! ATTENTION! ATTENTION!
+###
+
+# System wide functions and aliases.
+# Environment stuff goes in /etc/profile
+
+# By default, we DO share group permissions
+# Even for non-interactive, non-login shells.
+umask 022
+
+# are we an interactive shell?
+if [ "$PS1" ]; then
+
+    # Turn on checkwinsize
+    shopt -s checkwinsize
+    [ "$PS1" = "\\s-\\v\\\$ " ] && export PS1='\u@\h:\w\n\$ '
+    export PS1='\u@\h:\w\n\$ '
+fi
+
+if ! shopt -q login_shell
+then
+    # We're not a login shell
+    # Need to redefine pathmunge, it get's undefined at the end of /etc/profile
+    pathmunge () {
+        if ! echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
+            if [ "$2" = "after" ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+        fi
+    }
+
+    # Only display echos from profile.d scripts if we are no login shell
+    # and interactive - otherwise just process them to set envvars
+    for i in /etc/profile.d/*.sh; do
+        if [ -r "$i" ]; then
+            if [ "$PS1" ]; then
+                . $i
+            else
+                . $i >/dev/null 2>&1
+            fi
+        fi
+    done
+
+    unset i
+    unset pathmunge
+
+fi
+
+

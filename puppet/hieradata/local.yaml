@@ -20,11 +20,19 @@ cszk-hosts-with-bootstrap  :
 
 zk-election-port :  2889
 zk-leader-port :  3889
-
 zk1-ip-address :  '192.168.10.20'
 zk2-ip-address :  '192.168.10.21'
 zk3-ip-address :  '192.168.10.22'
 
 nodejs-version : '5.x'
+
+# content tools 
+ct-repo-user : 'dieple'
+ct-repo-user-rsa-id : '/home/vagrant/.ssh/id_rsa'
+ct-repo-url :
+  - git@github.com:dieple/jhipster-2.23.0.git
+
+ct-checkout-path :
+  - /opt/app/content-tools
 
 

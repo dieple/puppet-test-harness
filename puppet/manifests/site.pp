@@ -18,7 +18,15 @@ node 'cszk02', 'cszk03' {
 }
 
 node 'node01', 'node02' {
-	include profile::mongodb::install
+  include base
+  include motd
+  class { 'java' :
+    package => 'java-1.8.0-openjdk-devel',
+  }
+  include repo_jenkins
+  include jenkins
+	#include profile::jenkins::install
+	#include profile::mongodb::install
 	#include profile::nodejs::install
   #include profile::java::openjdk
   #include profile::solr::install
