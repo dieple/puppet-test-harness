@@ -54,7 +54,7 @@ class base {
   include ntp
   include timezone
   include openssh
-  include sudo
+#  include sudo
 
 #  include monit
 #  include nrpe

@@ -33,3 +33,10 @@ node 'node01', 'node02' {
 	#include profile::consul::client
 }
 
+node 'content' {
+  include base
+  include profile::java::openjdk
+	include profile::mongodb::install
+	include profile::nodejs::install
+	include profile::git_clone_repo::content
+}

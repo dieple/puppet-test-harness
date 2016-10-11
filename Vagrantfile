@@ -31,8 +31,8 @@ Vagrant.configure(2) do |config|
       end
 
       # copy private ssh key for vagrant to checkout git repo
-      node.vm.synced_folder "/Users/devops/.ssh", "/vagrant/.ssh/"
-      node.vm.provision :shell, :inline => "cp /vagrant/.ssh/id_rsa /home/vagrant/.ssh/id_rsa; chown -R vagrant:vagrant /home/vagrant/.ssh"
+      #node.vm.synced_folder "/Users/devops/.ssh", "/vagrant/.ssh/"
+      #node.vm.provision :shell, :inline => "cp /vagrant/.ssh/id_rsa /home/vagrant/.ssh/id_rsa; chown -R vagrant:vagrant /home/vagrant/.ssh"
 
     end
   end

@@ -26,13 +26,15 @@ zk3-ip-address :  '192.168.10.22'
 
 nodejs-version : '5.x'
 
-# content tools 
+# content tools
 ct-repo-user : 'dieple'
+ct-repo-revision : 'master'
+ct-repo-name : 'content'
 ct-repo-user-rsa-id : '/home/vagrant/.ssh/id_rsa'
 ct-repo-url :
-  - git@github.com:dieple/jhipster-2.23.0.git
+  - https://github.com/dieple/ansible-mac-dev-local-setup.git
 
 ct-checkout-path :
-  - /opt/app/content-tools
+  - /opt/app
 
 
