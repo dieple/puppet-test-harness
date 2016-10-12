@@ -9,12 +9,13 @@ node 'haproxy' {
 
 node 'cszk01' {
   #include profile::consul::bootstrap
-  include profile::zookeeper::init
+  include base
+  include profile::zookeeper::install
 }
 
 node 'cszk02', 'cszk03' {
 	include profile::consul::server
-  include profile::zookeeper::init
+  include profile::zookeeper::install
 }
 
 node 'node01', 'node02' {

@@ -1,133 +1,79 @@
-## Overview:
-    This is a puppet module which can both install and manage Apache Zookeeper.
-    It incorporates support for running multiple zookeeper instances on the same machine,
-    which comes in handy, mostly when your infrastructure is in it's early days, when there are
-    not many machines. 
- 
-## "What's in the box":
-    There are three things that this module provides:
-     - The zookeeper class, which is the main class that should install the desired zookeeper version.
-     - The zookeeper::install class, which inherits the main class, and is not really meant to be used
-       by itself (Inherits parameters from the main class).
-     - The zookeeper::configuration resource, which is supposed to be used for configuring a zookeeper instance
-       on a given machine.
-       
-## Usage guide:
-In order to be able to use  this module, you first need to add it to your dependencies list.
-### Usage example:
-#### Simple usage:
-##### The zookeeper class:
-```puppet
-    include zookeeper
-```
-or
-```puppet
-    class {'zookeeper': }
-```
-##### The configuration resource:
-  Please note that the servers parameter should look like below:
-```puppet
-  ...
-    servers => {
-      1 =>{
-          ip => '127.0.0.1',
-          leaderPort => 2888,
-          electionPort => 3888
-        }
-      }
-  ...
-```
-```puppet
-    zookeeper::resource::configuration{'localhost':}
-```
-#### Advanced usage:
-    Please note that the usage example you see below contains all the possible parameters, 
-    as well as the default value for each parameter.
-##### zookeeper class:
-```puppet
-  class {'zookeeper':
-    id                     => 1,
-    url                    => 'http://www.eu.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz',
-    digest_string          => '971c379ba65714fd25dc5fe8f14e9ad1',
-    follow_redirects       => true,
-    extension              => 'tar.gz',
-    checksum               => true,
-    digest_type            => 'md5',
-    user                   => 'zookeeper',
-    manage_user            => true,
-    tmpDir                 => '/tmp',
-    installDir             => '/opt',
-    jvmFlags               => '-Dzookeeper.log.threshold=INFO -Xmx1024m',
-    dataLogDir             => '/var/log/zookeeper',
-    dataDir                => '/var/lib/zookeeper',
-    configDir              => '/etc/zookeeper',
-    clientPortAddress      => "127.0.0.1",
-    globalOutstandingLimit => 1000,
-    maxClientCnxns         => 2000,
-    snapCount              => 100000,
-    cnxTimeout             => 20000,
-    purgeInterval          => 1,
-    snapRetainCount        => 3,
-    tickTime               => 60000,
-    leaderServes           => 'yes',
-    servers                => { },
-    syncEnabled            => true,
-    standaloneEnabled      => true,
-    electionAlg            => 3,
-    initLimit              => 5,
-    syncLimit              => 5,
-    clientPort             => 2181,
-    leaderPort             => 3888,
-    leaderElectionPort     => 2888,
-    install_java           => true,
-    java_package           => 'java-1.8.0-openjdk',
-    manage_service         => true,
-    create_aio_service     => true,
-    manage_firewall        => true,
-    service_name           => 'zookeeper'
-  }
-```
-##### configuration resource:
-```puppet
-  zookeeper::resource::configuration {'localhost':
-    ensure                 => 'present',
-    user                   => $::zookeeper::user,
-    id                     => $::zookeeper::id,
-    jvmFlags               => $::zookeeper::jvmFlags,
-    purgeInterval          => $::zookeeper::purgeInterval,
-    dataLogDir             => $::zookeeper::dataLogDir,
-    dataDir                => $::zookeeper::dataDir,
-    configDir              => $::zookeeper::configDir,
-    clientPortAddress      => $::zookeeper::clientPortAddress,
-    globalOutstandingLimit => $::zookeeper::globalOutstandingLimit,
-    maxClientCnxns         => $::zookeeper::maxClientCnxns,
-    snapCount              => $::zookeeper::snapCount,
-    snapRetainCount        => $::zookeeper::snapRetainCount,
-    tickTime               => $::zookeeper::tickTime,
-    leaderServes           => $::zookeeper::leaderServes,
-    servers                => $::zookeeper::servers,
-    syncEnabled            => $::zookeeper::syncEnabled,
-    electionAlg            => $::zookeeper::electionAlg,
-    initLimit              => $::zookeeper::initLimit,
-    cnxTimeout             => $::zookeeper::cnxTimeout,
-    standaloneEnabled      => $::zookeeper::standaloneEnabled,
-    syncLimit              => $::zookeeper::syncLimit,
-    clientPort             => $::zookeeper::clientPort,
-    leaderPort             => $::zookeeper::leaderPort,
-    leaderElectionPort     => $::zookeeper::leaderElectionPort,
-    manage_service         => $::zookeeper::manage_service,
-    create_aio_service     => $::zookeeper::create_aio_service,
-    manage_firewall        => $::zookeeper::manage_firewall,
-    service_name           => $::zookeeper::service_name,
-    tmpDir                 => $::zookeeper::tmpDir,
-    installDir             => $::zookeeper::installDir
-  }
-```
+# zookeeper
 
-## Other notes:
-    This module was built to manage a clustered zookeeper setup. 
-    In case you encounter any issues with it, do not hesitate to signal them on GitHub.
-  
-## OS Support:
-    This has only been tested on CentOS 7, for which it was created in the first place.
-    
+#### Table of Contents
+
+1. [Overview](#overview)
+2. [Module Description - What the module does and why it is useful](#module-description)
+3. [Setup - The basics of getting started with zookeeper](#setup)
+    * [What zookeeper affects](#what-zookeeper-affects)
+    * [Setup requirements](#setup-requirements)
+    * [Beginning with zookeeper](#beginning-with-zookeeper)
+4. [Usage - Configuration options and additional functionality](#usage)
+5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+5. [Limitations - OS compatibility, etc.](#limitations)
+6. [Development - Guide for contributing to the module](#development)
+
+## Overview
+
+A one-maybe-two sentence summary of what the module does/what problem it solves.
+This is your 30 second elevator pitch for your module. Consider including
+OS/Puppet version it works with.
+
+## Module Description
+
+If applicable, this section should have a brief description of the technology
+the module integrates with and what that integration enables. This section
+should answer the questions: "What does this module *do*?" and "Why would I use
+it?"
+
+If your module has a range of functionality (installation, configuration,
+management, etc.) this is the time to mention it.
+
+## Setup
+
+### What zookeeper affects
+
+* A list of files, packages, services, or operations that the module will alter,
+  impact, or execute on the system it's installed on.
+* This is a great place to stick any warnings.
+* Can be in list or paragraph form.
+
+### Setup Requirements **OPTIONAL**
+
+If your module requires anything extra before setting up (pluginsync enabled,
+etc.), mention it here.
+
+### Beginning with zookeeper
+
+The very basic steps needed for a user to get the module up and running.
+
+If your most recent release breaks compatibility or requires particular steps
+for upgrading, you may wish to include an additional section here: Upgrading
+(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+
+## Usage
+
+Put the classes, types, and resources for customizing, configuring, and doing
+the fancy stuff with your module here.
+
+## Reference
+
+Here, list the classes, types, providers, facts, etc contained in your module.
+This section should include all of the under-the-hood workings of your module so
+people know what the module is touching on their system but don't need to mess
+with things. (We are working on automating this section!)
+
+## Limitations
+
+This is where you list OS compatibility, version compatibility, etc.
+
+## Development
+
+Since your module is awesome, other users will want to play with it. Let them
+know what the ground rules for contributing are.
+
+## Release Notes/Contributors/Etc **Optional**
+
+If you aren't using changelog, put your release notes here (though you should
+consider using changelog). You may also add any additional sections you feel are
+necessary or important to include here. Please use the `## ` header.
