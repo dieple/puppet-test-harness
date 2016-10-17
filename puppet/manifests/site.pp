@@ -23,7 +23,6 @@ node 'node01', 'node02' {
   class { 'java' :
     package => 'java-1.8.0-openjdk-devel',
   }
-  include repo_jenkins
   include jenkins
 	#include profile::jenkins::install
 	#include profile::mongodb::install
@@ -42,8 +41,7 @@ node 'content' {
 }
 
 node 'jenkins' {
-  include repo_jenkins
   include profile::java::openjdk
   include base
-	include profile::jenkins
+	include jenkins
 }
