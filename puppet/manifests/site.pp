@@ -20,7 +20,6 @@ node 'cszk02', 'cszk03' {
 
 node 'node01', 'node02' {
   include base
-  include motd
   class { 'java' :
     package => 'java-1.8.0-openjdk-devel',
   }
@@ -40,4 +39,11 @@ node 'content' {
 	include profile::mongodb::install
 	include profile::nodejs::install
 	include profile::git_clone_repo::content
+}
+
+node 'jenkins' {
+  include repo_jenkins
+  include profile::java::openjdk
+  include base
+	include profile::jenkins
 }

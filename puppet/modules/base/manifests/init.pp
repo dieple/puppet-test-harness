@@ -8,12 +8,12 @@ class base {
   stage { 'first':  before  => Stage['main'] }
   stage { 'last':   require => Stage['main'] }
 
-  class {
+#  class {
 #    'repo_centos62_eden':  stage => prereq;
 #    'repo_eden_rpm':       stage => prereq;
-    'motd':                stage => first;
+#    'motd':                stage => first;
 #    'rvm':                 stage => last;
-  }
+#  }
 
   ###
   ### Base modules

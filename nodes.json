@@ -29,7 +29,7 @@
       "ip": "192.168.10.51",
       "ports": [8080]
     },
-    "content.example.com": {
+    "editorial.example.com": {
       "ip": "192.168.10.52",
       "ports": [3000,8140,27017]
     }
